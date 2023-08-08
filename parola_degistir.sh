@@ -9,7 +9,7 @@ DATA=$(zenity --forms --title="Şifre Değiştir" \
 
 if [ $? -ne 0 ] || [ -z "$DATA" ]; then
   zenity --info --text="İşlem iptal edildi"
-  exit 1
+  bash ./LB42-ayarlar-programcigi.sh 
 fi
 
 
@@ -19,13 +19,15 @@ P_N_C=$(echo "$DATA" | awk -F '|' '{print $3}')
 
 if [ "$P_W" != "$P_N_C" ]; then
   zenity --error --text="Yeni şifreler uyuşmuyor."
-  exit 1
+  bash ./LB42-ayarlar-programcigi.sh 
 fi
 
 echo -e "$P_O\n$P_W\n$P_W" | passwd > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
   zenity --info --text="Şifre başarıyla güncellendi."
+  bash ./LB42-ayarlar-programcigi.sh 
 else
   zenity --error --text="İşlem başarısız oldu."
+  bash ./LB42-ayarlar-programcigi.sh 
 fi 
