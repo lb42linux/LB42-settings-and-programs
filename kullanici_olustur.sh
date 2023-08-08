@@ -21,8 +21,10 @@ if echo "$currp" | sudo -S echo "" >/dev/null 2>&1; then
     np=$(awk -F'|' '{print $2}' <<< "$DATA")
     conp=$(awk -F'|' '{print $3}' <<< "$DATA")
 
+if [ -z "$un" ] || [ -z "$np" ]; then 
+bash ./LB42-ayarlar-programcigi.sh 
    
-    if [ "$np" = "$conp" ]; then
+    elif [ "$np" = "$conp" ]; then
        
         sudo useradd -m "$un"
 
@@ -30,9 +32,18 @@ if echo "$currp" | sudo -S echo "" >/dev/null 2>&1; then
         echo -e "$np\n$np" | sudo passwd "$un"
 
         zenity --info --title="Kullanıcı oluştur" --text="İşlem Başarılı"
+        bash ./LB42-ayarlar-programcigi.sh 
+
+
+
+	    
+        
     else
         zenity --error --title="Kullanıcı oluştur" --text="Şifreler Eşleşmiyor"
+        bash ./LB42-ayarlar-programcigi.sh
     fi
 else
     zenity --error --title="Kullanıcı oluştur" --text="Şifre Doğrulanamadı"
+    bash ./LB42-ayarlar-programcigi.sh 
 fi
+
